@@ -1,14 +1,12 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { Menu, X, ListCheck, FolderKanban, BarChart3 } from "lucide-react";
+import { Menu, X, Home, ListCheck, FolderKanban, BarChart3 } from "lucide-react";
 
 const Container = styled.aside<{ isOpen: boolean }>`
   width: ${(props) => (props.isOpen ? "220px" : "70px")};
   height: 100vh;
   background-color: #1e293b;
   color: white;
-  display: flex;
-  flex-direction: column;
   transition: width 0.3s ease-in-out;
   padding-top: 20px;
 `;
@@ -59,6 +57,10 @@ export default function Sidebar() {
         {isOpen ? <X size={24} /> : <Menu size={24} />}
       </ToggleButton>
       <MenuList>
+        <MenuItem>
+          <IconWrapper><Home size={20} /></IconWrapper>
+          {isOpen && "Home"}
+        </MenuItem>
         <MenuItem>
           <IconWrapper><ListCheck size={20} /></IconWrapper>
           {isOpen && "To-Do List"}
