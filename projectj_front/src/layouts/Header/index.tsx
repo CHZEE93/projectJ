@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { User, LogIn } from "lucide-react";
+import IconButton from "../../Components/IconButton";
+import { LogIn, User } from "lucide-react";
 
 const Container = styled.div`
   display: flex;
@@ -27,18 +28,7 @@ const UserActions = styled.div`
   gap: 16px;
 `;
 
-const IconButton = styled.button`
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: none;
-    border: none;
-    color:white;
-    cursor: pointer;
-    &:hover {
-        opacity: 0.8;
-    }
-`;
+
 
 export default function Header(){
     return(
@@ -47,12 +37,7 @@ export default function Header(){
             Project J
         </Logotmp>
         <UserActions>
-        <IconButton>
-            <User size={24} />
-        </IconButton>
-        <IconButton>
-            <LogIn size={24} />
-        </IconButton>
+        <IconButton icon={<LogIn size={24} />} url="./login"/>
       </UserActions>
     </Container>
     );  

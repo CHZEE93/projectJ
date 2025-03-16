@@ -44,8 +44,6 @@ const ListItem = styled.li`
     }
 `
 
-
-
 export type DatePiece = Date | null;
 export type SelectedDate = DatePiece | [DatePiece, DatePiece];
 
@@ -61,7 +59,7 @@ export default function Home() {
         <Content>
             <h2>📅 달력</h2>
             <div style={{display: 'flex', justifyContent: 'center'}}>
-                <Calendar onChange={setSelectedDate} value={selectedDate} />
+                <Calendar onChange={setSelectedDate} value={selectedDate} locale="en-US"  />
             </div>
         </Content>
 
