@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import InputBox from "../../Components/InputBox";
 
 const LoginContainer = styled.div`
     display: flex;
@@ -24,15 +25,6 @@ const Title = styled.h2`
   color: #333;
 `;
 
-const Input = styled.input`
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
-`;
-
 const Button = styled.button`
   width: 100%;
   padding: 10px;
@@ -54,8 +46,8 @@ export default function Login(){
     <LoginContainer>
         <LoginBox>
             <Title>로그인</Title>
-            <Input type="text" placeholder="아이디" />
-            <Input type="password" placeholder="비밀번호" />
+            <InputBox type="text" placeholder="아이디" />
+            <InputBox type="password" placeholder="비밀번호"/>
             <Button>LOGIN</Button>
         </LoginBox>
     </LoginContainer>
