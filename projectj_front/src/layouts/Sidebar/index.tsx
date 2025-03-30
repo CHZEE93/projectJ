@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { Menu, X, Home, ListCheck, FolderKanban, BarChart3 } from "lucide-react";
+import { Menu, X, Home, ListCheck, FolderKanban, BarChart3, StickyNote } from "lucide-react";
 
 const Container = styled.aside<{ isOpen: boolean }>`
   width: ${(props) => (props.isOpen ? "220px" : "70px")};
@@ -60,6 +60,10 @@ export default function Sidebar() {
         <MenuItem>
           <IconWrapper><Home size={20} /></IconWrapper>
           {isOpen && "Home"}
+        </MenuItem>
+        <MenuItem>
+          <IconWrapper><StickyNote size={20} /></IconWrapper>
+          {isOpen && "Board"}
         </MenuItem>
         <MenuItem>
           <IconWrapper><ListCheck size={20} /></IconWrapper>

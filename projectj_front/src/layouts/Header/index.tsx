@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import IconButton from "../../Components/IconButton";
-import { LogIn, User } from "lucide-react";
+import { LogIn, User, UserPlus } from "lucide-react";
 
 const Container = styled.div`
   display: flex;
@@ -37,8 +37,9 @@ export default function Header(){
             Project J
         </Logotmp>
         <UserActions>
-        <IconButton icon={<LogIn size={24} />} url="./login"/>
-      </UserActions>
+          <IconButton icon={<UserPlus size={24} />} url="./signup"/>
+          <IconButton icon={<LogIn size={24} />} url="./login"/>
+        </UserActions>
     </Container>
     );  
 }

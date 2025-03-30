@@ -4,6 +4,7 @@ interface Props {
     type : 'text' | 'password';
     label?: string
     placeholder?: string;
+    required?: boolean;
 }
 
 const InputBoxContainer = styled.div`
@@ -43,11 +44,12 @@ const InputBoxContent = styled.input.attrs<{ inputType?: string, inputPlaceholde
     line-height: 140%;
 `
 
-export default function InputBox({type, label, placeholder}:Props){
+export default function InputBox({type, label, placeholder, required = false}:Props){
     return(
         <InputBoxContainer>
             {label !== undefined && (<InputBoxLabel>{label}</InputBoxLabel>) }
             <InputBoxBox>
+                {required && (<span style={{color:"red"}}>*</span>)}
                 <InputBoxContent inputType={type} inputPlaceholder={placeholder} />
             </InputBoxBox> 
         </InputBoxContainer>

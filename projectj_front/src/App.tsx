@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import Container from './layouts/Container';
 import Home from './views/Home';
 import Login from './views/Login';
+import Signup from './views/Signup';
 
 function App() {
   return (
@@ -10,7 +11,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='*' element={<h1>404 NOT FOUND</h1>} />
       </Route>
-      
+      <Route path='/signup' element={<Signup />} />
       <Route path='/login' element={<Login />} />
     </Routes>
   );
