@@ -1,0 +1,80 @@
+package com.projectj.projectj_back.config;
+
+import java.io.IOException;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
+import org.springframework.security.config.annotation.web.configurers.HttpBasicConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import com.projectj.projectj_back.filter.JwtAuthenticationFilter;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
+
+@Configuration
+@EnableWebSecurity
+@RequiredArgsConstructor
+public class WebSecurityConfig {
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
+
+    @Bean
+    protected SecurityFilterChain configure(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity
+                .cors(cors -> cors
+                        .configurationSource(corsConfigurationSoruce()))
+                .csrf(CsrfConfigurer::disable)
+                .httpBasic(HttpBasicConfigurer::disable)
+                .sessionManagement(sessionManagement -> sessionManagement
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeHttpRequests(request -> request
+                        .requestMatchers("/", "/**")
+                        .permitAll()
+                        .anyRequest().authenticated())
+                .exceptionHandling(exceptionHandling -> exceptionHandling
+                        .authenticationEntryPoint(new FailedAuthenticationEntryPoint()))
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+
+        return httpSecurity.build();
+    }
+
+    @Bean
+    protected CorsConfigurationSource corsConfigurationSoruce() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.addAllowedOrigin("*");
+        configuration.addAllowedMethod("*");
+        configuration.addAllowedHeader("*");
+
+        UrlBasedCorsConfigurationSource soruce = new UrlBasedCorsConfigurationSource();
+        soruce.registerCorsConfiguration("/**", configuration);
+
+        return soruce;
+
+    }
+}
+
+class FailedAuthenticationEntryPoint implements AuthenticationEntryPoint {
+
+    @Override
+    public void commence(HttpServletRequest request, HttpServletResponse response,
+            AuthenticationException authException) throws IOException, ServletException {
+
+        response.setContentType("application/json");
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        response.getWriter().write("{\"code\": \"AF\", \"message\" : \" Authorized Failed.\"}");
+
+    }
+
+}

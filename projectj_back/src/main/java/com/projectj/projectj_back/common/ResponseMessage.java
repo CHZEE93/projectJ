@@ -1,4 +1,4 @@
-package com.projectj.projectj_back.projectj_back.common;
+package com.projectj.projectj_back.common;
 
 public interface ResponseMessage {
 

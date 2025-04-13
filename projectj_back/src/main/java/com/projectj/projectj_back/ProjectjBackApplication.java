@@ -1,4 +1,4 @@
-package com.projectj.projectj_back.projectj_back;
+package com.projectj.projectj_back;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
